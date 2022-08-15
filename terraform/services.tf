@@ -4,6 +4,12 @@ resource "kubernetes_namespace" "cicd" {
   }
 }
 
+resource "kubernetes_namespace" "storage" {
+  metadata {
+    name = "storage"
+  }
+}
+
 resource "helm_release" "argocd" {
   name       = "argocd"
 
