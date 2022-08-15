@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio-operator
+  namespace: cicd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/JoaoManoel/bigdata-on-k8s.git'
+    path: repository/helm-charts/minio-operator
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values-dev.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: storage
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
